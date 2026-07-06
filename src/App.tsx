@@ -1,0 +1,18 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Lecture0 from './pages/Lecture0';
+
+function App() {
+  return (
+    <Router>
+      <div className="min-h-screen font-sans text-white relative">
+        <div className="stars"></div>
+        <Routes>
+          <Route path="/" element={<Lecture0 />} />
+          <Route path="/lecture/0" element={<Lecture0 />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
