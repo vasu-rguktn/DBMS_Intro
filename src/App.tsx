@@ -3,7 +3,7 @@ import Lecture0 from './pages/Lecture0';
 
 function App() {
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <div className="min-h-screen font-sans text-white relative">
         <div className="stars"></div>
         <Routes>
