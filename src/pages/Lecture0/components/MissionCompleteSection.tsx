@@ -2,6 +2,8 @@
 import { motion } from 'framer-motion';
 import { Rocket, CheckCircle2, ChevronRight } from 'lucide-react';
 
+import { useNavigate } from 'react-router-dom';
+
 const achievements = [
   "What is Data",
   "What is a Database",
@@ -11,6 +13,8 @@ const achievements = [
 ];
 
 const MissionCompleteSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section id="mission-complete-section" className="min-h-screen flex flex-col items-center justify-center relative px-4 py-20 overflow-hidden">
       
@@ -64,9 +68,10 @@ const MissionCompleteSection = () => {
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(176, 38, 255, 0.8)" }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/lecture/1')}
             className="px-10 py-5 bg-gradient-to-r from-[var(--color-neon-purple)] to-[var(--color-neon-blue)] text-white font-bold rounded-full text-2xl flex items-center gap-3 shadow-lg"
           >
-            Learning SQL
+            Database Constraints
             <ChevronRight size={28} />
           </motion.button>
         </div>
