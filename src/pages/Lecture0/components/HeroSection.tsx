@@ -1,8 +1,11 @@
 
 import { motion } from 'framer-motion';
 import { Rocket, ChevronDown } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   const handleScroll = () => {
     const nextSection = document.getElementById('story-section');
     if (nextSection) {
@@ -38,15 +41,26 @@ const HeroSection = () => {
           "Can you save the universe from Data Chaos?"
         </p>
 
-        <motion.button
-          whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(0, 240, 255, 0.6)" }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handleScroll}
-          className="glass-panel px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold text-white transition-all border border-[var(--color-neon-cyan)] hover:bg-[var(--color-neon-cyan)] hover:text-black"
-        >
-          Start Mission
-          <ChevronDown size={24} />
-        </motion.button>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <motion.button
+            whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(0, 240, 255, 0.6)" }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleScroll}
+            className="glass-panel px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold text-white transition-all border border-[var(--color-neon-cyan)] hover:bg-[var(--color-neon-cyan)] hover:text-black"
+          >
+            Start Mission
+            <ChevronDown size={24} />
+          </motion.button>
+          
+          <motion.button
+            whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(176, 38, 255, 0.6)" }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/lecture/8')}
+            className="glass-panel px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold text-white transition-all border border-[var(--color-neon-purple)] hover:bg-[var(--color-neon-purple)] hover:text-black"
+          >
+            Explore Relational Algebra
+          </motion.button>
+        </div>
 
       </motion.div>
     </section>

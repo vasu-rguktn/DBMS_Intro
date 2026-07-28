@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Lecture0 from './pages/Lecture0';
 import Lecture1 from './pages/Lecture1';
+import Lecture8 from './pages/Lecture8';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           <Route path="/" element={<Lecture0 />} />
           <Route path="/lecture/0" element={<Lecture0 />} />
           <Route path="/lecture/1" element={<Lecture1 />} />
+          <Route path="/lecture/8" element={<Lecture8 />} />
         </Routes>
       </div>
     </Router>
