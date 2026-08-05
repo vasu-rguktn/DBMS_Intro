@@ -1,6 +1,5 @@
-
 import { motion } from 'framer-motion';
-import { Rocket, ChevronDown } from 'lucide-react';
+import { Rocket, ChevronDown, Database } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
@@ -52,6 +51,16 @@ const HeroSection = () => {
             <ChevronDown size={24} />
           </motion.button>
           
+          <motion.button
+            whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(250, 204, 21, 0.6)" }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/lecture/3')}
+            className="glass-panel px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold text-white transition-all border border-yellow-400 hover:bg-yellow-400 hover:text-black"
+          >
+            Explore SQL Universe
+            <Database size={22} />
+          </motion.button>
+
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(176, 38, 255, 0.6)" }}
             whileTap={{ scale: 0.95 }}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Homepage from './components/Homepage';
 import OperatorRoadmap from './components/OperatorRoadmap';
@@ -14,6 +14,33 @@ const Lecture8 = () => {
   const [unlockedOperatorIndex, setUnlockedOperatorIndex] = useState(0);
   const [activeOperatorIndex, setActiveOperatorIndex] = useState(0);
 
+  // Load progress from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('relational_algebra_progress');
+    if (saved) {
+      try {
+        const progress = JSON.parse(saved);
+        if (typeof progress.currentStage === 'string') setCurrentStage(progress.currentStage);
+        if (typeof progress.unlockedOperatorIndex === 'number') setUnlockedOperatorIndex(progress.unlockedOperatorIndex);
+        if (typeof progress.activeOperatorIndex === 'number') setActiveOperatorIndex(progress.activeOperatorIndex);
+      } catch (e) {
+        console.error("Failed to load Relational Algebra progress:", e);
+      }
+    }
+  }, []);
+
+  // Save progress to localStorage whenever state changes
+  useEffect(() => {
+    if (currentStage === 'home' && unlockedOperatorIndex === 0 && activeOperatorIndex === 0) return;
+    
+    const progress = {
+      currentStage,
+      unlockedOperatorIndex,
+      activeOperatorIndex
+    };
+    localStorage.setItem('relational_algebra_progress', JSON.stringify(progress));
+  }, [currentStage, unlockedOperatorIndex, activeOperatorIndex]);
+
   const handleOperatorComplete = () => {
     if (activeOperatorIndex === unlockedOperatorIndex) {
       setUnlockedOperatorIndex(prev => prev + 1);
@@ -27,6 +54,21 @@ const Lecture8 = () => {
     } else {
       setActiveOperatorIndex(index);
       setCurrentStage('operator');
+    }
+  };
+
+  const handlePrevOperator = () => {
+    if (activeOperatorIndex > 0) {
+      setActiveOperatorIndex(prev => prev - 1);
+    }
+  };
+
+  const handleNextOperator = () => {
+    if (activeOperatorIndex < operatorsData.length - 1) {
+      if (activeOperatorIndex === unlockedOperatorIndex) {
+        setUnlockedOperatorIndex(prev => prev + 1);
+      }
+      setActiveOperatorIndex(prev => prev + 1);
     }
   };
 
@@ -51,6 +93,11 @@ const Lecture8 = () => {
                key={operatorsData[activeOperatorIndex].id}
                operator={operatorsData[activeOperatorIndex]} 
                onComplete={handleOperatorComplete} 
+               onBack={() => setCurrentStage('roadmap')}
+               onPrev={handlePrevOperator}
+               onNext={handleNextOperator}
+               hasPrev={activeOperatorIndex > 0}
+               hasNext={activeOperatorIndex < operatorsData.length - 1}
              />
           </motion.div>
         )}

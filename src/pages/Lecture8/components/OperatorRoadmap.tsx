@@ -33,22 +33,20 @@ export default function OperatorRoadmap({
               <div className="space-y-4 flex-1">
                 {groupOperators.map((operator) => {
                   const index = operatorsData.findIndex(o => o.id === operator.id);
-                  const isUnlocked = index <= unlockedIndex;
                   const isCompleted = index < unlockedIndex;
                   const isCurrent = index === unlockedIndex;
 
                   return (
                     <motion.button
                       key={operator.id}
-                      disabled={!isUnlocked}
-                      whileHover={isUnlocked ? { scale: 1.05 } : {}}
+                      whileHover={{ scale: 1.05 }}
                       onClick={() => onSelect(index)}
                       className={`w-full p-4 rounded-xl flex items-center justify-between text-left transition-all ${
                         isCurrent 
                           ? 'bg-cyan-500/20 border-2 border-cyan-500 shadow-[0_0_15px_rgba(0,240,255,0.3)]' 
                           : isCompleted 
                             ? 'bg-green-500/10 border border-green-500/50' 
-                            : 'bg-gray-800/50 border border-gray-700 opacity-70 cursor-not-allowed'
+                            : 'bg-gray-800/50 border border-gray-700 opacity-70 cursor-pointer'
                       }`}
                     >
                       <div className="flex items-center gap-4">

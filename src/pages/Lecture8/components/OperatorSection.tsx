@@ -5,10 +5,20 @@ import { Database, Zap, CheckCircle2, ChevronRight, XCircle, DatabaseBackup } fr
 
 export default function OperatorSection({ 
   operator, 
-  onComplete 
+  onComplete,
+  onBack,
+  onPrev,
+  onNext,
+  hasPrev,
+  hasNext
 }: { 
   operator: OperatorConfig, 
-  onComplete: () => void 
+  onComplete: () => void,
+  onBack: () => void,
+  onPrev: () => void,
+  onNext: () => void,
+  hasPrev: boolean,
+  hasNext: boolean
 }) {
   const [step, setStep] = useState<1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>(1);
   const [puzzleAnswer, setPuzzleAnswer] = useState<number | null>(null);
@@ -24,6 +34,40 @@ export default function OperatorSection({
       exit={{ opacity: 0, x: -50 }}
       className="max-w-5xl mx-auto w-full p-4 md:p-8"
     >
+      {/* Top Navigation Row */}
+      <div className="flex justify-between items-center mb-6">
+        <button
+          onClick={onBack}
+          className="px-4 py-2 bg-white/5 border border-white/10 hover:bg-white/10 text-gray-300 rounded-xl text-sm font-semibold cursor-pointer transition-colors"
+        >
+          &larr; Back to Roadmap
+        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={onPrev}
+            disabled={!hasPrev}
+            className={`px-4 py-2 border rounded-xl text-sm font-semibold transition-colors ${
+              hasPrev 
+                ? 'bg-white/5 border-white/10 hover:bg-white/10 text-gray-300 cursor-pointer' 
+                : 'bg-white/5 border-white/5 text-gray-600 cursor-not-allowed opacity-50'
+            }`}
+          >
+            &larr; Prev Operator
+          </button>
+          <button
+            onClick={onNext}
+            disabled={!hasNext}
+            className={`px-4 py-2 border rounded-xl text-sm font-semibold transition-colors ${
+              hasNext 
+                ? 'bg-white/5 border-white/10 hover:bg-white/10 text-gray-300 cursor-pointer' 
+                : 'bg-white/5 border-white/5 text-gray-600 cursor-not-allowed opacity-50'
+            }`}
+          >
+            Next Operator &rarr;
+          </button>
+        </div>
+      </div>
+
       {/* Progress Bar */}
       <div className="flex justify-between items-center mb-8 gap-2">
         {[1, 2, 3, 4, 5, 6, 7, 8].map(s => (

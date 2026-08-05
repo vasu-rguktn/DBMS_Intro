@@ -116,10 +116,10 @@ const ConstraintsResults = ({ stats, onRestart }: Props) => {
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(176, 38, 255, 0.4)" }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/lecture/3')}
             className="px-8 py-4 bg-gradient-to-r from-[var(--color-neon-purple)] to-[var(--color-neon-blue)] text-white font-bold rounded-full text-lg flex items-center justify-center gap-2"
           >
-            Continue Learning
+            Explore SQL Universe
             <ChevronRight size={20} />
           </motion.button>
         </div>
