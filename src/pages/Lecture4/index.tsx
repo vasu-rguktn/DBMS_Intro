@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Rocket, Database, AlertTriangle, Activity, Info, ChevronRight, BrainCircuit } from 'lucide-react';
 import { SPACE_MISSION_MASTER } from './data/masterData';
+import { FdTab, KeysTab, AxiomsTab } from './components/Lecture4Part1';
+import { ClosureTab, TwoNFTab, ThreeNFTab, DecompositionTab } from './components/Lecture4Part2';
+import { JourneyTab, FlashcardsTab } from './components/Lecture4Part3';
 
 export default function Lecture4() {
   const [activeTab, setActiveTab] = useState('intro');
@@ -236,15 +239,15 @@ export default function Lecture4() {
                 </motion.div>
               )}
               
-              {!['intro', 'atomic', 'anomalies'].includes(activeTab) && (
-                <motion.div key="wip" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                   <div className="flex flex-col items-center justify-center py-20 text-slate-400">
-                     <BrainCircuit size={64} className="mb-4 text-indigo-500/50" />
-                     <h2 className="text-2xl font-bold text-slate-300 mb-2">Section Under Construction</h2>
-                     <p>This module section is currently compiling its dependencies.</p>
-                   </div>
-                </motion.div>
-              )}
+              {activeTab === 'fd' && <FdTab key="fd" />}
+              {activeTab === 'keys' && <KeysTab key="keys" />}
+              {activeTab === 'axioms' && <AxiomsTab key="axioms" />}
+              {activeTab === 'closure' && <ClosureTab key="closure" />}
+              {activeTab === '2nf' && <TwoNFTab key="2nf" />}
+              {activeTab === '3nf' && <ThreeNFTab key="3nf" />}
+              {activeTab === 'decomposition' && <DecompositionTab key="decomposition" />}
+              {activeTab === 'journey' && <JourneyTab key="journey" />}
+              {activeTab === 'flashcards' && <FlashcardsTab key="flashcards" />}
 
             </AnimatePresence>
           </div>
