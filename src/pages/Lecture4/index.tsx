@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Rocket, Database, AlertTriangle, Activity, Info, ChevronRight, BrainCircuit } from 'lucide-react';
+import { Rocket, Database, AlertTriangle, Activity, Info, ChevronRight } from 'lucide-react';
 import { SPACE_MISSION_MASTER } from './data/masterData';
 import { FdTab, KeysTab, AxiomsTab } from './components/Lecture4Part1';
 import { ClosureTab, TwoNFTab, ThreeNFTab, DecompositionTab } from './components/Lecture4Part2';
