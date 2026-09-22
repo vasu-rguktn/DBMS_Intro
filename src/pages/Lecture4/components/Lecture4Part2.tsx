@@ -1,22 +1,35 @@
 import { motion } from 'framer-motion';
-import { Layers, Maximize2, ShieldAlert } from 'lucide-react';
+import { Maximize2, Layers } from 'lucide-react';
+import { ActivityClosure } from './ActivityModules';
+import { ActivityMinimalCover, ActivityDecomposition } from './ActivityModulesPart2';
+import { TwoNFGate, ThreeNFGate, BCNFGate } from './NormalFormGates';
 
 export function ClosureTab() {
   return (
-    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-      <h2 className="text-3xl font-bold mb-6 text-indigo-300 flex items-center gap-2"><Maximize2 /> Attribute Closure & Minimal Cover</h2>
-      <div className="bg-indigo-900/20 border border-indigo-500/30 p-6 rounded-xl mb-6">
-        <h3 className="text-xl font-bold text-white mb-2">Attribute Closure (X⁺)</h3>
-        <p className="text-slate-300">The set of all attributes that can be functionally determined by X using a given set of functional dependencies.</p>
+    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
+      <div className="flex items-center justify-between pb-4 border-b border-indigo-500/20">
+        <div>
+          <h2 className="text-3xl font-bold text-indigo-300 flex items-center gap-2">
+            <Maximize2 /> Attribute Closure & Minimal Cover
+          </h2>
+          <p className="text-xs text-indigo-200 mt-1">Calculating X⁺ & Reducing Dependency Sets</p>
+        </div>
       </div>
-      <div className="bg-slate-800/80 p-6 rounded-xl border border-slate-600/50">
-        <h3 className="text-xl font-bold text-white mb-4">Minimal Cover Process</h3>
-        <ol className="list-decimal pl-5 space-y-4 text-slate-300">
-          <li><strong>Ensure one attribute on RHS:</strong> Convert A → BC into A → B and A → C.</li>
-          <li><strong>Remove extraneous LHS attributes:</strong> Check if an attribute on the left can be removed without changing implication.</li>
-          <li><strong>Remove redundant FDs:</strong> Check if an entire dependency can be removed while preserving equivalence.</li>
-        </ol>
+
+      <div className="p-5 bg-indigo-950/40 border border-indigo-500/30 rounded-2xl space-y-3 text-xs text-slate-300 leading-relaxed">
+        <h3 className="text-base font-bold text-white">Attribute Closure (X⁺) Definition</h3>
+        <p>
+          The closure of attribute set X, written as <strong>X⁺</strong>, is the set of ALL attributes in relation schema R that can be functionally determined by X under a given set of dependencies F.
+        </p>
+        <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 font-mono text-[11px] text-amber-300 space-y-1">
+          <div>Given F = {'{ MissionID → SpacecraftID, SpacecraftID → SpacecraftName, MissionID → CommanderID, CommanderID → CommanderName }'}</div>
+          <div>Calculate MissionID⁺:</div>
+          <div className="text-emerald-400 font-bold">MissionID⁺ = {"{ MissionID, SpacecraftID, SpacecraftName, CommanderID, CommanderName }"}</div>
+        </div>
       </div>
+
+      <ActivityClosure />
+      <ActivityMinimalCover />
     </motion.div>
   );
 }
@@ -24,62 +37,55 @@ export function ClosureTab() {
 export function TwoNFTab() {
   return (
     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-      <h2 className="text-3xl font-bold mb-6 text-indigo-300 flex items-center gap-2"><Layers /> Second Normal Form (2NF)</h2>
-      <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700/50 mb-6">
-        <p className="text-slate-300 text-lg">A relation is in 2NF if:</p>
-        <ul className="list-disc pl-8 mt-2 space-y-2 text-slate-300">
-          <li>It is in 1NF, and</li>
-          <li>Every non-prime attribute is fully functionally dependent on every candidate key.</li>
-        </ul>
-      </div>
-      <p className="text-slate-400 bg-indigo-900/10 p-4 rounded-lg">
-        <strong>Transformation:</strong> Decompose to remove partial dependencies, separating the duplicated information.
-      </p>
+      <TwoNFGate />
     </motion.div>
   );
 }
 
 export function ThreeNFTab() {
   return (
-    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-      <h2 className="text-3xl font-bold mb-6 text-indigo-300 flex items-center gap-2"><ShieldAlert /> 3NF & BCNF</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-indigo-950/40 p-6 rounded-xl border border-indigo-500/30">
-          <h3 className="text-xl font-bold text-white mb-2">Third Normal Form (3NF)</h3>
-          <p className="text-slate-300 text-sm mb-4">For every non-trivial FD X → A, at least one is true:</p>
-          <ul className="list-disc pl-5 space-y-2 text-slate-400 text-sm">
-            <li>X is a superkey, OR</li>
-            <li>A is a prime attribute.</li>
-          </ul>
-        </div>
-        <div className="bg-purple-950/40 p-6 rounded-xl border border-purple-500/30">
-          <h3 className="text-xl font-bold text-white mb-2">Boyce-Codd Normal Form (BCNF)</h3>
-          <p className="text-slate-300 text-sm mb-4">For every non-trivial FD X → Y:</p>
-          <ul className="list-disc pl-5 space-y-2 text-slate-400 text-sm">
-            <li>X is a superkey.</li>
-          </ul>
-          <p className="text-xs text-purple-300 mt-4">BCNF is stronger than 3NF.</p>
-        </div>
-      </div>
+    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
+      <ThreeNFGate />
+      <BCNFGate />
     </motion.div>
   );
 }
 
 export function DecompositionTab() {
   return (
-    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-      <h2 className="text-3xl font-bold mb-6 text-indigo-300">Decomposition</h2>
-      <p className="text-slate-300 mb-6">Decomposition means splitting one relation into smaller relations to reduce redundancy.</p>
-      <div className="space-y-6">
-        <div className="bg-slate-800/80 p-6 rounded-xl border border-slate-600/50">
-          <h3 className="text-xl font-bold text-green-400 mb-2">Lossless-Join Decomposition</h3>
-          <p className="text-slate-300">Joining the decomposed relations recreates exactly the original relation without spurious tuples.</p>
-        </div>
-        <div className="bg-slate-800/80 p-6 rounded-xl border border-slate-600/50">
-          <h3 className="text-xl font-bold text-yellow-400 mb-2">Dependency Preservation</h3>
-          <p className="text-slate-300">Functional dependencies can be enforced by checking the decomposed relations without needing to join them back together.</p>
+    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
+      <div className="flex items-center justify-between pb-4 border-b border-indigo-500/20">
+        <div>
+          <h2 className="text-3xl font-bold text-indigo-300 flex items-center gap-2">
+            <Layers /> Schema Decomposition Properties
+          </h2>
+          <p className="text-xs text-indigo-200 mt-1">Lossless-Join & Dependency Preservation</p>
         </div>
       </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
+        <div className="p-5 bg-slate-900/80 rounded-2xl border border-emerald-500/40 space-y-2">
+          <h3 className="text-base font-bold text-emerald-400">1. Lossless-Join Decomposition</h3>
+          <p className="leading-relaxed">
+            A decomposition of R into R1 and R2 is <strong>lossless</strong> if natural join R1 ⋈ R2 produces EXACTLY the original relation R without spurious rows.
+          </p>
+          <div className="font-mono text-[11px] text-emerald-300 bg-slate-950 p-2 rounded">
+            Condition: (R1 ∩ R2) → R1  OR  (R1 ∩ R2) → R2
+          </div>
+        </div>
+
+        <div className="p-5 bg-slate-900/80 rounded-2xl border border-amber-500/40 space-y-2">
+          <h3 className="text-base font-bold text-amber-400">2. Dependency Preservation</h3>
+          <p className="leading-relaxed">
+            A decomposition preserves dependencies if all original functional dependencies in F can be enforced directly within decomposed tables without performing joins.
+          </p>
+          <div className="font-mono text-[11px] text-amber-300 bg-slate-950 p-2 rounded">
+            Condition: (F1 ∪ F2)⁺ = F⁺
+          </div>
+        </div>
+      </div>
+
+      <ActivityDecomposition />
     </motion.div>
   );
 }
