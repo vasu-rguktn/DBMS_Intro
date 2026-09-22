@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Lecture0 from './pages/Lecture0';
 import Lecture1 from './pages/Lecture1';
 import Lecture3 from './pages/Lecture3';
+import Lecture4 from './pages/Lecture4';
 import Lecture8 from './pages/Lecture8';
 import GlobalUnitSelector from './components/GlobalUnitSelector';
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/lecture/0" element={<Lecture0 />} />
           <Route path="/lecture/1" element={<Lecture1 />} />
           <Route path="/lecture/3" element={<Lecture3 />} />
+          <Route path="/lecture/4" element={<Lecture4 />} />
           <Route path="/lecture/8" element={<Lecture8 />} />
         </Routes>
       </div>

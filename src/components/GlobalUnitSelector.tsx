@@ -7,6 +7,7 @@ const units = [
   { path: '/lecture/0', name: 'UNIT-0: Database Galaxy', icon: Compass, color: 'text-cyan-400' },
   { path: '/lecture/1', name: 'UNIT-1: Constraints', icon: Key, color: 'text-purple-400' },
   { path: '/lecture/3', name: 'UNIT-3: SQL Universe', icon: Database, color: 'text-yellow-400' },
+  { path: '/lecture/4', name: 'UNIT-4: Relational Design', icon: Database, color: 'text-green-400' },
   { path: '/lecture/8', name: 'UNIT-8: Relational Algebra', icon: Binary, color: 'text-red-400' }
 ];
 
